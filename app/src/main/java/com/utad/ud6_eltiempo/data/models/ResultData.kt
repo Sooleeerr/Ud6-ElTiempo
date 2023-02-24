@@ -10,5 +10,7 @@ data class ResultData(
     val lat: String,
     val lon: String,
     val timezone: String,
-    val timezone_offset: Int
+    val timezone_offset: Int,
+    val current: CurrentData,
+    val daily: List<DailyData>
 )
