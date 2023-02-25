@@ -6,6 +6,10 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.RelativeSizeSpan
+import android.text.style.SuperscriptSpan
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -55,14 +59,39 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         weatherViewModel.currentWeather.observe(this, Observer {
             val format = SimpleDateFormat("dd 'de' MMMM, HH:mm")
-            //binding.currenTimeLbl.text = format.format(Date(it.dt))
-            binding.currentTimeLbl.text = format.format(Date(System.currentTimeMillis()))
+            binding.currentTimeLbl.text = format.format(Date(it.dt.toLong()*1000))
+            //binding.currentTimeLbl.text = format.format(Date(System.currentTimeMillis()))
 
             binding.CurrentTempLbl.text = it.temp.substringBefore(".") + "º"
+
             binding.currentHumLbl.text = it.humidity.substringBefore(".") + "%"
-            binding.currentPresionLbl.text = it.pressure.substringBefore(".") + "mB"
+
+
+
+            //Introducimos la presión introduciendo la unidad "mB" como Superindice
+            val presion : String= it.pressure.substringBefore(".") + "mB"
+            val mStringSpan = SpannableStringBuilder(presion)
+            mStringSpan.setSpan(SuperscriptSpan(),presion.indexOf("mB"),presion.indexOf("mB")+2,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            mStringSpan.setSpan(
+                RelativeSizeSpan(0.5f),presion.indexOf("mB"),presion.indexOf("mB")+2,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            binding.currentPresionLbl.text = mStringSpan
+
             binding.currentSensacionLbl.text = it.feels_like.substringBefore(".") + "º"
-            binding.currentVientoLbl.text = it.wind_speed.substringBefore(".") + " km/h"
+            //Introducimos la presión introduciendo la unidad "mB" como Superindice
+            //binding.currentVientoLbl.text = it.wind_speed.substringBefore(".") + " km/h"
+            val velocidad : String= it.wind_speed.substringBefore(".") + " km/h"
+            val mVelocidadSpan = SpannableStringBuilder(velocidad)
+            mVelocidadSpan.setSpan(SuperscriptSpan(),velocidad.indexOf("km"),velocidad.indexOf("km")+4,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            mVelocidadSpan.setSpan(
+                RelativeSizeSpan(0.5f),velocidad.indexOf("km"),velocidad.indexOf("km")+4,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            binding.currentVientoLbl.text = mVelocidadSpan
+
+
+
             binding.currentUvLbl.text = it.uvi
             binding.currentWeatherLbl.text = it.weather[0].description
             bindUrlImage(

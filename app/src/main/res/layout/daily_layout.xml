@@ -19,19 +19,22 @@
             android:id="@+id/cardView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/weatherDailyImg"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:layout_marginStart="10dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/descripRvId"
@@ -40,9 +43,13 @@
                     android:fontFamily="@font/roboto"
                     android:text="tiempo"
                     android:textAlignment="center"
-                    android:textSize="10sp" />
-
-            </LinearLayout>
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weatherDailyImg" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -50,18 +57,19 @@
             android:id="@+id/rainTextRvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/roboto"
             android:text="rain"
-            app:layout_constraintStart_toStartOf="@+id/windLbl2"
+            android:textColor="#000000"
+            app:layout_constraintStart_toEndOf="@+id/windTextRvId"
             app:layout_constraintTop_toTopOf="@+id/windTextRvId" />
 
         <TextView
             android:id="@+id/windLbl2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:drawableStart="@drawable/rain_icon_16x16"
-            app:layout_constraintStart_toEndOf="@+id/windLbl"
+            app:layout_constraintStart_toStartOf="@+id/rainTextRvId"
             app:layout_constraintTop_toTopOf="@+id/windLbl" />
 
         <androidx.cardview.widget.CardView
@@ -69,14 +77,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView2"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tempRvId"
@@ -98,7 +107,10 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/roboto"
                     android:text="Max"
+                    android:textColor="#000000"
                     android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/minRVId"
                     app:layout_constraintTop_toBottomOf="@+id/tempRvId" />
 
@@ -108,7 +120,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
                     android:text="Min"
+                    android:textColor="#000000"
                     android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tempRvId" />
 
@@ -133,9 +147,8 @@
             android:id="@+id/windLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:drawableStart="@drawable/wind_icon_16x16"
-            app:layout_constraintStart_toEndOf="@+id/humedadLbl"
+            app:layout_constraintStart_toStartOf="@+id/windTextRvId"
             app:layout_constraintTop_toTopOf="@+id/humedadLbl" />
 
         <TextView
@@ -155,6 +168,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto"
             android:text="hum"
+            android:textColor="#000000"
             app:layout_constraintStart_toStartOf="@+id/humedadLbl"
             app:layout_constraintTop_toBottomOf="@+id/humedadLbl" />
 
@@ -162,10 +176,12 @@
             android:id="@+id/windTextRvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto"
             android:text="wind"
-            app:layout_constraintStart_toStartOf="@+id/windLbl"
+            android:textColor="#000000"
+            app:layout_constraintStart_toEndOf="@+id/humTextRVId"
             app:layout_constraintTop_toBottomOf="@+id/windLbl" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

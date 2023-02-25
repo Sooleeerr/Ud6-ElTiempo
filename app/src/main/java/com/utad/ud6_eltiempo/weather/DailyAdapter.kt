@@ -1,6 +1,10 @@
 package com.utad.ud6_eltiempo.weather
 
 import android.os.Build
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.RelativeSizeSpan
+import android.text.style.SuperscriptSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +42,20 @@ class DailyAdapter (private val data: ArrayList<DailyData>): RecyclerView.Adapte
 
             itemView.findViewById<TextView>(R.id.tempRvId).text = weather.temp.day.substringBefore(".") + "º"
             itemView.findViewById<TextView>(R.id.humTextRVId).text=weather.humidity.substringBefore(".") + "%"
-            itemView.findViewById<TextView>(R.id.windTextRvId).text=weather.wind_speed.substringBefore(".") +  " km/h"
+            //itemView.findViewById<TextView>(R.id.windTextRvId).text=weather.wind_speed.substringBefore(".") +  " km/h"
+
+            val velocidad : String= weather.wind_speed.substringBefore(".") +  " km/h"
+            val mVelocidadSpan = SpannableStringBuilder(velocidad)
+            mVelocidadSpan.setSpan(
+                SuperscriptSpan(),velocidad.indexOf("km"),velocidad.indexOf("km")+4,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            mVelocidadSpan.setSpan(
+                RelativeSizeSpan(0.5f),velocidad.indexOf("km"),velocidad.indexOf("km")+4,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            itemView.findViewById<TextView>(R.id.windTextRvId).text= mVelocidadSpan
+
+
+
             itemView.findViewById<TextView>(R.id.descripRvId).text=weather.weather[0].description
             itemView.findViewById<TextView>(R.id.maxRVId).text="Max "+weather.temp.max.substringBefore(".") + "º"
             itemView.findViewById<TextView>(R.id.minRVId).text="Min "+weather.temp.min.substringBefore(".") + "º"
