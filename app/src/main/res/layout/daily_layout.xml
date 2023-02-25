@@ -15,15 +15,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/weatherDailyImg"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginStart="10dp" />
+
+                <TextView
+                    android:id="@+id/descripRvId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="tiempo"
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/rainTextRvId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:fontFamily="@font/roboto"
             android:text="rain"
             app:layout_constraintStart_toStartOf="@+id/windLbl2"
-            app:layout_constraintTop_toBottomOf="@+id/windLbl2" />
+            app:layout_constraintTop_toTopOf="@+id/windTextRvId" />
 
         <TextView
             android:id="@+id/windLbl2"
@@ -41,7 +71,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             app:cardElevation="0dp"
-            app:layout_constraintStart_toEndOf="@+id/weatherDailyImg"
+            app:layout_constraintStart_toEndOf="@+id/cardView2"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,14 +138,6 @@
             app:layout_constraintStart_toEndOf="@+id/humedadLbl"
             app:layout_constraintTop_toTopOf="@+id/humedadLbl" />
 
-        <ImageView
-            android:id="@+id/weatherDailyImg"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/humedadLbl"
             android:layout_width="wrap_content"
@@ -125,15 +147,6 @@
             android:drawableStart="@drawable/humedad_icon_16x16"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/descripRvId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="tiempo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/weatherDailyImg" />
 
         <TextView
             android:id="@+id/humTextRVId"
