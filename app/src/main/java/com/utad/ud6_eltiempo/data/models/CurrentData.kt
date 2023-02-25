@@ -25,9 +25,9 @@ package com.utad.ud6_eltiempo.data.models
         ]
  */
 data class CurrentData(
-    val dt: Long,
-    val sunrise: Long,
-    val sunset: Long,
+    val dt: String,
+    val sunrise: String,
+    val sunset: String,
     val temp: String,
     val feels_like: String,
     val pressure: String,

@@ -43,11 +43,11 @@ package com.utad.ud6_eltiempo.data.models
  */
 
 data class DailyData (
-    val dt:Long,
-    val sunrise:Long,
-    val sunset:Long,
-    val moonrise:Long,
-    val moonset:Long,
+    val dt:String,
+    val sunrise:String,
+    val sunset:String,
+    val moonrise:String,
+    val moonset:String,
     val moon_phase:String,
     val temp : TempData,
     val feels_like: FeelsLikeData,
