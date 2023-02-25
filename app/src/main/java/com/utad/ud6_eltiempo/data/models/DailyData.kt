@@ -42,10 +42,7 @@ package com.utad.ud6_eltiempo.data.models
         },
  */
 
-data class DailyData(
-    val dailyData: List<Daily>
-)
-data class Daily (
+data class DailyData (
     val dt:Long,
     val sunrise:Long,
     val sunset:Long,

@@ -12,5 +12,5 @@ data class ResultData(
     val timezone: String,
     val timezone_offset: Int,
     val current: CurrentData,
-    val daily: List<DailyData>
+    val daily: ArrayList<DailyData>
 )

@@ -1,13 +1,11 @@
 package com.utad.ud6_eltiempo
 
-import android.R
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +17,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import com.squareup.picasso.Picasso
 import com.utad.ud6_eltiempo.databinding.ActivityMainBinding
+import com.utad.ud6_eltiempo.weather.DailyAdapter
 import com.utad.ud6_eltiempo.weather.LocationViewModel
 import com.utad.ud6_eltiempo.weather.WeatherViewModel
 import kotlinx.coroutines.runBlocking
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
+        lateinit var adapter: DailyAdapter
 
         setContentView(binding.root)
         runBlocking {
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
             locViewModel.getLocationData(latitude, longitude)
             weatherViewModel.getWeather(latitude, longitude)
         }
-
+        adapter = DailyAdapter(weatherViewModel.dailyList)
         locViewModel.locModel.observe(this, Observer {
             binding.locationLbl.text = it.label
         })
@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
             val format = SimpleDateFormat("dd 'de' MMMM, HH:mm")
             //binding.currenTimeLbl.text = format.format(Date(it.dt))
             binding.currentTimeLbl.text = format.format(Date(System.currentTimeMillis()))
+
             binding.CurrentTempLbl.text = it.temp.substringBefore(".") + "º"
             binding.currentHumLbl.text = it.humidity.substringBefore(".") + "%"
             binding.currentPresionLbl.text = it.pressure.substringBefore(".") + "mB"
@@ -64,20 +65,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
             binding.currentVientoLbl.text = it.wind_speed.substringBefore(".") + " km/h"
             binding.currentUvLbl.text = it.uvi
             binding.currentWeatherLbl.text = it.weather[0].description
-
-            /*val image = findViewById<View>(binding.currentWeatherIc.id) as ImageView
-            Picasso.get()
-                .load(imageUrl)
-                .resize(100, 100) // 100 width and 100 height
-                .centerCrop() // move image to cente
-                .into(image)
-
-             */
-
-            bindUrlImage(binding.currentWeatherIc, "http://openweathermap.org/img/wn/"+it.weather[0].icon+"@2x.png")
-            //binding.currentWeatherIc.setImageURI(Uri.parse("http://openweathermap.org/img/wn/10d@2x.png"))
-
-
+            bindUrlImage(
+                binding.currentWeatherIc,
+                "http://openweathermap.org/img/wn/" + it.weather[0].icon + "@2x.png"
+            )
+            binding.RecyclerId.adapter = adapter
         })
 
 

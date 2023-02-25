@@ -12,7 +12,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class WeatherViewModel:ViewModel() {
-    val dailyList = MutableStateFlow(listOf<DailyData>())
+    //val dailyList = MutableLiveData(listOf<DailyData>())
+    val dailyList = ArrayList<DailyData>()
     val currentWeather= MutableLiveData<CurrentData>()
     val loading = MutableStateFlow(false)
 
@@ -23,7 +24,8 @@ class WeatherViewModel:ViewModel() {
             val response = ApiRest.service.getWeather(lat,long)
             if (response.isSuccessful && response.body() != null) {
                 currentWeather.value = response.body()?.current!!
-                Log.i("WeatherViewModel", "getWeather: ${dailyList.value.toString()}")
+                dailyList.addAll(response.body()?.daily!!)
+                Log.i("WeatherViewModel", "getWeather: ${dailyList.toString()}")
             } else {
                 Log.i("WeatherViewModel", "getWeather: ${response.errorBody()?.string()}")
             }
